@@ -1,17 +1,18 @@
 describe("Matcher", function(){
     matcher = require('../matcher.js');
     var dictionary = {urls:
-        {"https://www.heroku.com/": {
-            "isDirect": false,
-            "parent": "https://salesforce.com/",
-            "source": "",
-            "description": "",
+        {
+            "heroku.com": {
+                "isDirect": false,
+                "parent": "https://salesforce.com/",
+                "source": "",
+                "description": "",
             },
-        "https://www.salesforce.com/": {
-            "isDirect": true,
-            "parent": "",
-            "source": "",
-            "description": "",
+            "salesforce.com": {
+                "isDirect": true,
+                "parent": "",
+                "source": "",
+                "description": "",
             }
         }
     };
@@ -22,5 +23,13 @@ describe("Matcher", function(){
     it("should return true for any url that does match the list", function(){
         expect(matcher.doesUrlMatchBlackList('https://www.heroku.com/', dictionary)).toBe(true);
         expect(matcher.doesUrlMatchBlackList('https://www.salesforce.com/', dictionary)).toBe(true);
+    });
+    it("should return true without www", function(){
+        expect(matcher.doesUrlMatchBlackList('https://heroku.com/', dictionary)).toBe(true);
+        expect(matcher.doesUrlMatchBlackList('https://salesforce.com/', dictionary)).toBe(true);
+    });
+    it("should return true for subdomains", function(){
+        expect(matcher.doesUrlMatchBlackList('https://sub.heroku.com/', dictionary)).toBe(true);
+        expect(matcher.doesUrlMatchBlackList('http://www.sub.salesforce.com/', dictionary)).toBe(true);
     });
 });
