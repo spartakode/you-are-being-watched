@@ -2,13 +2,17 @@
     "manifest_version": 2,
     "name": "You Are Being Watched",
     "version": "0.0.1",
+    "icons": {"16": "iconmonstr-shield-18-icon-16.png",
+            "48": "iconmonstr-shield-18-icon-48.png",
+            "128": "iconmonstr-shield-18-icon-128.png"
+    },
     "description": "Extension to warn you when visiting a site owned by people who may support government surveillance",
     "author": "spartakode",
     "permissions":[
         "tabs"
         ],
     "background":{
-        "scripts":["checkpage.js"],
+        "scripts":["checkpage.js", "matcher.js", "directory.js"],
         "persistent": false
     }
 }
